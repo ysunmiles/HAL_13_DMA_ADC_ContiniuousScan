@@ -100,13 +100,12 @@ int main(void)
   OLED_Init();
   OLED_Clear();
   
-  HAL_ADCEx_Calibration_Start(&hadc1);
-  
   OLED_ShowString(1, 1, "ADC_PA0 = ");
   OLED_ShowString(2, 1, "ADC_PA1 = ");
   OLED_ShowString(3, 1, "ADC_PA3 = ");
   OLED_ShowString(4, 1, "ADC_PA6 = ");
   
+  HAL_ADCEx_Calibration_Start(&hadc1);
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)ADCValue,4);  /* Start ADC with interrupt mode */
   
   /* USER CODE END 2 */
@@ -175,13 +174,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
-{
-  if (hadc == &hadc1)
-  {
-    HAL_ADC_Start_DMA(&hadc1,(uint32_t*)ADCValue,4);
-  }
-}
+
 /* USER CODE END 4 */
 
 /**
